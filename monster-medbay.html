@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monster Medbay - Team Tap Games</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header>
+  <div class="logo">
+    <a href="index.html"><img src="teamtap.png" alt="Team Tap Games Logo"></a>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="index.html#games">Games</a></li>
+      <li><a href="index.html#apps">Apps</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="spacer"></div>
+
+<section class="project-hero">
+  <div class="project-hero-content">
+    <h1>Monster Medbay</h1>
+    <p class="project-subtitle">Cooperative hospital management with a rogue-lite twist</p>
+  </div>
+</section>
+
+<section class="project-detail">
+  <div class="project-container">
+    <div class="project-gallery">
+      <div class="carousel" id="projectCarousel">
+        <div class="slides">
+          <img src="medbaylogo.jpg" alt="Monster Medbay Screenshot 1">
+          <img src="medbayss.jpg" alt="Monster Medbay Screenshot 2">
+          <img src="medbayss2.jpg" alt="Monster Medbay Screenshot 3">
+        </div>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
+        <div class="indicators">
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-info">
+      <div class="project-tags">
+        <span class="tag">Cooperative</span>
+        <span class="tag">Video Game</span>
+        <span class="tag">Rogue-lite</span>
+      </div>
+      
+      <h2>About Monster Medbay</h2>
+      <p>Monster Medbay is a fast-paced cooperative game where players team up to manage a chaotic hospital treating quirky monsters. With a Rogue-lite twist, each playthrough offers new challenges and opportunities.</p>
+      
+      <h3>Key Features</h3>
+      <ul class="feature-list">
+        <li>Cooperative multiplayer gameplay</li>
+        <li>Rogue-lite progression system</li>
+        <li>Quirky monster patients to treat</li>
+        <li>Procedurally generated challenges</li>
+        <li>Unlockable upgrades and abilities</li>
+      </ul>
+
+      <h3>Gameplay</h3>
+      <p>Work together with your team to treat a variety of unique monsters in a chaotic hospital setting. Each run is different thanks to the rogue-lite mechanics, ensuring fresh challenges every time you play. Coordinate your actions, manage resources, and keep the medbay running smoothly!</p>
+
+      <div class="project-actions">
+        <a href="index.html#games" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Games</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Team Tap Games. All rights reserved.</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
+

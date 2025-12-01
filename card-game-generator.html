@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Game Generator - Team Tap Games</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header>
+  <div class="logo">
+    <a href="index.html"><img src="teamtap.png" alt="Team Tap Games Logo"></a>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html#about">About Us</a></li>
+      <li><a href="index.html#games">Games</a></li>
+      <li><a href="index.html#apps">Apps</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="spacer"></div>
+
+<section class="project-hero">
+  <div class="project-hero-content">
+    <h1>Card Game Generator</h1>
+    <p class="project-subtitle">Create your own card game and print it out</p>
+  </div>
+</section>
+
+<section class="project-detail">
+  <div class="project-container">
+    <div class="project-gallery">
+      <div class="carousel" id="projectCarousel">
+        <div class="slides">
+          <img src="icon.png" alt="Card Game Generator Screenshot 1">
+          <img src="icon.svg" alt="Card Game Generator Screenshot 2">
+          <img src="icon.png" alt="Card Game Generator Screenshot 3">
+        </div>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
+        <div class="indicators">
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-info">
+      <div class="project-tags">
+        <span class="tag">Web</span>
+        <span class="tag">Desktop</span>
+      </div>
+      
+      <h2>About Card Game Generator</h2>
+      <p>Create your own card game and print it out. Card Game Generator is a powerful tool that lets you design custom card games from scratch, with full control over card design, rules, and gameplay mechanics.</p>
+      
+      <h3>Key Features</h3>
+      <ul class="feature-list">
+        <li>Custom card design tools</li>
+        <li>Template library</li>
+        <li>Print-ready export</li>
+        <li>Rule editor and organizer</li>
+        <li>Card game testing tools</li>
+      </ul>
+
+      <h3>How It Works</h3>
+      <p>Card Game Generator provides an intuitive interface for creating custom card games. Design your cards with custom artwork, text, and stats. Organize your game rules, test your mechanics, and export everything in a print-ready format. Perfect for game designers, educators, or anyone who wants to create their own card game.</p>
+
+      <div class="project-actions">
+        <a href="index.html#apps" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Apps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 Team Tap Games. All rights reserved.</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
+

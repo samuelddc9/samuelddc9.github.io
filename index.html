@@ -11,13 +11,15 @@
 <body>
 <header>
   <div class="logo">
-    <img src="teamtap.png" alt="Team Tap Games Logo"> <!-- Company logo -->
+    <a href="index.html"><img src="teamtap.png" alt="Team Tap Games Logo"></a> <!-- Company logo -->
 <!--    <h1>Team Tap Games</h1>-->
   </div>
   <nav>
     <ul>
       <li><a href="#about">About Us</a></li>
       <li><a href="#games">Games</a></li>
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="blog.html">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -33,85 +35,226 @@
 </section>
 <section id="games">
   <h2>Upcoming Games</h2>
+  <div class="filter-container">
+    <button class="filter-btn active" data-filter="all" onclick="filterItems('games', 'all')">All</button>
+    <button class="filter-btn" data-filter="cooperative" onclick="filterItems('games', 'cooperative')">Cooperative</button>
+    <button class="filter-btn" data-filter="action" onclick="filterItems('games', 'action')">Action</button>
+    <button class="filter-btn" data-filter="board-game" onclick="filterItems('games', 'board-game')">Board Game</button>
+    <button class="filter-btn" data-filter="video-game" onclick="filterItems('games', 'video-game')">Video Game</button>
+  </div>
   <div class="game-list">
-    <div class="game-item">
+    <div class="game-item" data-tags="cooperative video-game">
       <div class="carousel" id="carousel1">
         <div class="slides">
           <img src="hospitalhavoc.png" alt="Hospital Havoc Screenshot 1">
           <img src="hospitalhavoc2.webp" alt="Hospital Havoc Screenshot 2">
           <img src="hospitalhavoc3.png" alt="Hospital Havoc Screenshot 3">
         </div>
-        <button class="prev" onclick="plusSlides(-1, 0)">&#10094;</button>
-        <button class="next" onclick="plusSlides(1, 0)">&#10095;</button>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
         <div class="indicators">
-          <span class="dot" onclick="currentSlide(1, 0)"></span>
-          <span class="dot" onclick="currentSlide(2, 0)"></span>
-          <span class="dot" onclick="currentSlide(3, 0)"></span>
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
         </div>
       </div>
-      <h3>Hospital Havoc</h3>
+      <h3><a href="hospital-havoc.html">Hospital Havoc</a></h3>
       <p>
         Hospital Havoc is a fast-paced cooperative game where players team up to manage a chaotic hospital</p>
+      <a href="hospital-havoc.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
     </div>
 
-    <div class="game-item">
+    <div class="game-item" data-tags="cooperative video-game rogue-lite">
       <div class="carousel" id="carousel2">
         <div class="slides">
           <img src="medbaylogo.jpg" alt="Game 2 Screenshot 1">
           <img src="medbayss.jpg" alt="Game 2 Screenshot 2">
           <img src="medbayss2.jpg" alt="Game 2 Screenshot 3">
         </div>
-        <button class="prev" onclick="plusSlides(-1, 1)">&#10094;</button>
-        <button class="next" onclick="plusSlides(1, 1)">&#10095;</button>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
         <div class="indicators">
-          <span class="dot" onclick="currentSlide(1, 1)"></span>
-          <span class="dot" onclick="currentSlide(2, 1)"></span>
-          <span class="dot" onclick="currentSlide(3, 1)"></span>
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
         </div>
       </div>
-      <h3>Monster Medbay</h3>
+      <h3><a href="monster-medbay.html">Monster Medbay</a></h3>
       <p>Monster Medbay is a fast-paced cooperative game where players team up to manage a chaotic hospital treating quirky monsters. With a Rogue-lite twist</p>
+      <a href="monster-medbay.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
     </div>
 
-    <div class="game-item">
+    <div class="game-item" data-tags="action video-game rhythm">
       <div class="carousel" id="carousel3">
         <div class="slides">
           <img src="syncslayer.jpg" alt="Game 3 Screenshot 1">
           <img src="syncslayer2.jpg" alt="Game 3 Screenshot 2">
           <img src="syncslayer3.jpg" alt="Game 3 Screenshot 3">
         </div>
-        <button class="prev" onclick="plusSlides(-1, 2)">&#10094;</button>
-        <button class="next" onclick="plusSlides(1, 2)">&#10095;</button>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
         <div class="indicators">
-          <span class="dot" onclick="currentSlide(1, 2)"></span>
-          <span class="dot" onclick="currentSlide(2, 2)"></span>
-          <span class="dot" onclick="currentSlide(3, 2)"></span>
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
         </div>
       </div>
-      <h3>Sync Slayer</h3>
+      <h3><a href="sync-slayer.html">Sync Slayer</a></h3>
       <p>Master the rhythm of combat in this action-packed, top-down game. Synchronize your moves to a dynamic soundtrack and battle through a fantasy world of mythical foes. With stylish graphics and strategic gameplay, Sync Slayer challenges you to become the champion of rhythm and combat.</p>
+      <a href="sync-slayer.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
     </div>
-    <div class="game-item">
+    <div class="game-item" data-tags="cooperative board-game strategy">
       <div class="carousel" id="carousel4">
         <div class="slides">
           <img src="horizon1.webp" alt="Game 4 Screenshot 1">
           <img src="horizon2.webp" alt="Game 4 Screenshot 2">
           <img src="horizon3.webp" alt="Game 4 Screenshot 3">
         </div>
-        <button class="prev" onclick="plusSlides(-1, 3)">&#10094;</button>
-        <button class="next" onclick="plusSlides(1, 3)">&#10095;</button>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
         <div class="indicators">
-          <span class="dot" onclick="currentSlide(1, 3)"></span>
-          <span class="dot" onclick="currentSlide(2, 3)"></span>
-          <span class="dot" onclick="currentSlide(3, 3)"></span>
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
         </div>
       </div>
-      <h3>Horizon Breach BoardGame</h3>
+      <h3><a href="horizon-breach.html">Horizon Breach BoardGame</a></h3>
       <p> In a world under siege by colossal kaiju, teams of elite pilots must join forces, piloting powerful mechas to protect humanity. Cooperation and strategy are key as players work together to outsmart and defeat monstrous threats, defending the last remnants of civilization.</p>
+      <a href="horizon-breach.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="game-item" data-tags="board-game card-game">
+      <div class="carousel" id="carousel5">
+        <div class="slides">
+          <img src="horizon1.webp" alt="Game 4 Screenshot 1">
+          <img src="horizon2.webp" alt="Game 4 Screenshot 2">
+          <img src="horizon3.webp" alt="Game 4 Screenshot 3">
+        </div>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
+        <div class="indicators">
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
+        </div>
+      </div>
+      <h3><a href="kick-soccer-card-game.html">Kick Soccer Card Game</a></h3>
+      <p> Simple and fun soccer themed card game to play with your friends.</p>
+      <a href="kick-soccer-card-game.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="game-item" data-tags="video-game cooperative">
+      <div class="carousel" id="carousel5">
+        <div class="slides">
+          <img src="horizon1.webp" alt="Game 4 Screenshot 1">
+          <img src="horizon2.webp" alt="Game 4 Screenshot 2">
+          <img src="horizon3.webp" alt="Game 4 Screenshot 3">
+        </div>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
+        <div class="indicators">
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
+        </div>
+      </div>
+      <h3><a href="kick-soccer-card-game.html">Lets get the party started</a></h3>
+      <p> Cooperative party game similar to Overcooked where make party goers have a good time with music and dance.</p>
+      <a href="kick-soccer-card-game.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
 
 
+</section>
+<section id="apps">
+  <h2>Apps & Software</h2>
+  <div class="filter-container">
+    <button class="filter-btn active" data-filter="all" onclick="filterItems('apps', 'all')">All</button>
+    <button class="filter-btn" data-filter="mobile" onclick="filterItems('apps', 'mobile')">Mobile</button>
+    <button class="filter-btn" data-filter="web" onclick="filterItems('apps', 'web')">Web</button>
+    <button class="filter-btn" data-filter="desktop" onclick="filterItems('apps', 'desktop')">Desktop</button>
+    <button class="filter-btn" data-filter="productivity" onclick="filterItems('apps', 'productivity')">Productivity</button>
+  </div>
+  <div class="game-list">
+    <div class="game-item" data-tags="mobile productivity">
+      <div class="carousel" id="carousel6">
+        <div class="slides">
+          <img src="icon.png" alt="App 1 Screenshot 1">
+          <img src="icon.svg" alt="App 1 Screenshot 2">
+          <img src="icon.png" alt="App 1 Screenshot 3">
+        </div>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
+        <div class="indicators">
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
+        </div>
+      </div>
+      <h3><a href="true-camera.html">True Camera - AI Proof Camera</a></h3>
+      <p>Sign your photos and videos to prove they are real and not AI generated.</p>
+      <a href="true-camera.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="game-item" data-tags="mobile productivity">
+      <div class="carousel" id="carousel7">
+        <div class="slides">
+          <img src="icon.png" alt="App 1 Screenshot 1">
+          <img src="icon.svg" alt="App 1 Screenshot 2">
+          <img src="icon.png" alt="App 1 Screenshot 3">
+        </div>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
+        <div class="indicators">
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
+        </div>
+      </div>
+      <h3><a href="farmer-connect.html">Farmer Connect</a></h3>
+      <p>Connect farmers and workers seamlessly.</p>
+      <a href="farmer-connect.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="game-item" data-tags="web desktop">
+      <div class="carousel" id="carousel8">
+        <div class="slides">
+          <img src="icon.png" alt="App 2 Screenshot 1">
+          <img src="icon.svg" alt="App 2 Screenshot 2">
+          <img src="icon.png" alt="App 2 Screenshot 3">
+        </div>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
+        <div class="indicators">
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
+        </div>
+      </div>
+      <h3><a href="rpg-helper.html">RPG Helper</a></h3>
+      <p>Manage your RPG Session characters and inventory.</p>
+      <a href="rpg-helper.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="game-item" data-tags="web desktop">
+      <div class="carousel" id="carousel9">
+        <div class="slides">
+          <img src="icon.png" alt="App 2 Screenshot 1">
+          <img src="icon.svg" alt="App 2 Screenshot 2">
+          <img src="icon.png" alt="App 2 Screenshot 3">
+        </div>
+        <button class="prev" onclick="plusSlides(-1, this)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1, this)">&#10095;</button>
+        <div class="indicators">
+          <span class="dot" onclick="currentSlide(1, this)"></span>
+          <span class="dot" onclick="currentSlide(2, this)"></span>
+          <span class="dot" onclick="currentSlide(3, this)"></span>
+        </div>
+      </div>
+      <h3><a href="card-game-generator.html">Card Game Generator</a></h3>
+      <p>Create your own card game and print it out.</p>
+      <a href="card-game-generator.html" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    
+  </div>
 </section>
 <section id="about">
 

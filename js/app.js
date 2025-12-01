@@ -1,23 +1,158 @@
-let slideIndexes = [0, 0, 0, 0];  // An array to store the slide index for each carousel
-let slideContainers = document.querySelectorAll('.slides'); // Select all slide containers
+// Dynamically detect all carousels and create slide indexes
+let slideContainers = document.querySelectorAll('.slides');
+let slideIndexes = Array(slideContainers.length).fill(0); // Initialize array with zeros for all carousels
 
-function plusSlides(n, carouselIndex) {
-  // console.log("gonna call showSlides with n = ", n +1, " and carouselIndex = ", carouselIndex);
+// Create a map of carousel elements to their indices for easy lookup
+let carouselMap = new Map();
+slideContainers.forEach((container, index) => {
+  carouselMap.set(container, index);
+});
+
+function getCarouselIndex(carouselElement) {
+  // Find the carousel index by looking up the slides container
+  let slidesContainer = carouselElement.closest('.carousel')?.querySelector('.slides');
+  if (slidesContainer && carouselMap.has(slidesContainer)) {
+    return carouselMap.get(slidesContainer);
+  }
+  // Fallback: find by carousel ID
+  let carouselId = carouselElement.closest('.carousel')?.id;
+  if (carouselId) {
+    let match = carouselId.match(/carousel(\d+)/);
+    if (match) {
+      return parseInt(match[1]) - 1; // Convert carousel1 -> 0, carousel2 -> 1, etc.
+    }
+  }
+  // Last resort: find index in NodeList
+  return Array.from(slideContainers).indexOf(slidesContainer);
+}
+
+function plusSlides(n, carouselIndexOrElement) {
+  let carouselIndex;
+  if (typeof carouselIndexOrElement === 'number') {
+    carouselIndex = carouselIndexOrElement;
+  } else {
+    // If it's an element (button), find its carousel index
+    let carousel = carouselIndexOrElement.closest('.carousel');
+    if (!carousel) {
+      console.error('Could not find carousel element');
+      return;
+    }
+    let slidesContainer = carousel.querySelector('.slides');
+    if (!slidesContainer) {
+      console.error('Could not find slides container');
+      return;
+    }
+    
+    // Try to find in map first
+    carouselIndex = carouselMap.get(slidesContainer);
+    
+    // If not in map, find by position in NodeList
+    if (carouselIndex === undefined) {
+      slideContainers = document.querySelectorAll('.slides');
+      carouselIndex = Array.from(slideContainers).indexOf(slidesContainer);
+      if (carouselIndex >= 0) {
+        carouselMap.set(slidesContainer, carouselIndex);
+      }
+    }
+    
+    // Last fallback: try to find by ID
+    if (carouselIndex === undefined || carouselIndex < 0) {
+      let carouselId = carousel.id;
+      if (carouselId) {
+        let match = carouselId.match(/carousel(\d+)/);
+        if (match) {
+          let idNum = parseInt(match[1]);
+          // Find the actual index by counting carousels before this one
+          slideContainers = document.querySelectorAll('.slides');
+          let allCarousels = document.querySelectorAll('.carousel');
+          let targetCarousel = Array.from(allCarousels).find(c => c.id === carouselId);
+          if (targetCarousel) {
+            let targetSlides = targetCarousel.querySelector('.slides');
+            carouselIndex = Array.from(slideContainers).indexOf(targetSlides);
+            if (carouselIndex >= 0) {
+              carouselMap.set(targetSlides, carouselIndex);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  if (carouselIndex === undefined || carouselIndex < 0 || carouselIndex >= slideIndexes.length) {
+    console.error('Invalid carousel index:', carouselIndex, 'Total carousels:', slideIndexes.length);
+    return;
+  }
+  
   showSlides(slideIndexes[carouselIndex] += n, carouselIndex);
 }
 
-function currentSlide(n, carouselIndex) {
-  // console.log("gonna call showSlides with n = ", n -1, " and carouselIndex = ", carouselIndex);
+function currentSlide(n, carouselIndexOrElement) {
+  let carouselIndex;
+  if (typeof carouselIndexOrElement === 'number') {
+    carouselIndex = carouselIndexOrElement;
+  } else {
+    // If it's an element (dot), find its carousel index
+    let carousel = carouselIndexOrElement.closest('.carousel');
+    if (!carousel) {
+      console.error('Could not find carousel element');
+      return;
+    }
+    let slidesContainer = carousel.querySelector('.slides');
+    if (!slidesContainer) {
+      console.error('Could not find slides container');
+      return;
+    }
+    
+    // Try to find in map first
+    carouselIndex = carouselMap.get(slidesContainer);
+    
+    // If not in map, find by position in NodeList
+    if (carouselIndex === undefined) {
+      slideContainers = document.querySelectorAll('.slides');
+      carouselIndex = Array.from(slideContainers).indexOf(slidesContainer);
+      if (carouselIndex >= 0) {
+        carouselMap.set(slidesContainer, carouselIndex);
+      }
+    }
+    
+    // Last fallback: try to find by ID
+    if (carouselIndex === undefined || carouselIndex < 0) {
+      let carouselId = carousel.id;
+      if (carouselId) {
+        let match = carouselId.match(/carousel(\d+)/);
+        if (match) {
+          let allCarousels = document.querySelectorAll('.carousel');
+          let targetCarousel = Array.from(allCarousels).find(c => c.id === carouselId);
+          if (targetCarousel) {
+            let targetSlides = targetCarousel.querySelector('.slides');
+            slideContainers = document.querySelectorAll('.slides');
+            carouselIndex = Array.from(slideContainers).indexOf(targetSlides);
+            if (carouselIndex >= 0) {
+              carouselMap.set(targetSlides, carouselIndex);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  if (carouselIndex === undefined || carouselIndex < 0 || carouselIndex >= slideIndexes.length) {
+    console.error('Invalid carousel index:', carouselIndex, 'Total carousels:', slideIndexes.length);
+    return;
+  }
+  
   showSlides(slideIndexes[carouselIndex] = n - 1, carouselIndex);
 }
 
 function showSlides(n, carouselIndex) {
-  console.log("showSlides called with n = ", n, " and carouselIndex = ", carouselIndex);
-  console.dir(slideContainers);
+  if (carouselIndex < 0 || carouselIndex >= slideContainers.length) {
+    console.error('Invalid carousel index:', carouselIndex);
+    return;
+  }
+  
   let slides = slideContainers[carouselIndex].querySelectorAll('img');
-  console.dir(slides);
-
-  let dots = slideContainers[carouselIndex].closest('.carousel').querySelectorAll('.dot');
+  let carousel = slideContainers[carouselIndex].closest('.carousel');
+  let dots = carousel?.querySelectorAll('.dot');
 
   if (n >= slides.length) { slideIndexes[carouselIndex] = 0; }
   if (n < 0) { slideIndexes[carouselIndex] = slides.length - 1; }
@@ -26,20 +161,76 @@ function showSlides(n, carouselIndex) {
     slide.style.display = (i === slideIndexes[carouselIndex]) ? 'block' : 'none';
   });
 
-  console.log("Dots length: ", dots.length, "Index: ", slideIndexes[carouselIndex]);
-  dots.forEach(dot => dot.classList.remove("active-dot"));
-  if (dots.length > slideIndexes[carouselIndex]) {
-    dots[slideIndexes[carouselIndex-1]].classList.add("active-dot");
-  } else {
-    console.error("Dot index out of range or no dots present.");
+  if (dots) {
+    dots.forEach(dot => dot.classList.remove("active-dot"));
+    if (dots.length > slideIndexes[carouselIndex]) {
+      dots[slideIndexes[carouselIndex]].classList.add("active-dot");
+    }
   }
 }
 
-// Initialize the first slide for both carousels
-showSlides(0, 0);
-showSlides(0, 1);
-showSlides(2  , 2);
-showSlides(0  , 3);
+// Initialize all carousels dynamically
+document.addEventListener('DOMContentLoaded', function() {
+  slideContainers = document.querySelectorAll('.slides');
+  slideIndexes = Array(slideContainers.length).fill(0);
+  
+  // Rebuild the map
+  carouselMap.clear();
+  slideContainers.forEach((container, index) => {
+    carouselMap.set(container, index);
+  });
+  
+  // Initialize the first slide for all carousels
+  for (let i = 0; i < slideContainers.length; i++) {
+    showSlides(0, i);
+  }
+});
+
+// Also initialize immediately if DOM is already loaded
+if (document.readyState === 'loading') {
+  // DOM is still loading, wait for DOMContentLoaded
+} else {
+  // DOM is already loaded
+  slideContainers = document.querySelectorAll('.slides');
+  slideIndexes = Array(slideContainers.length).fill(0);
+  carouselMap.clear();
+  slideContainers.forEach((container, index) => {
+    carouselMap.set(container, index);
+  });
+  for (let i = 0; i < slideContainers.length; i++) {
+    showSlides(0, i);
+  }
+}
+
+// Filter functionality
+function filterItems(section, filter) {
+  const sectionElement = document.getElementById(section);
+  const items = sectionElement.querySelectorAll('.game-item');
+  const filterButtons = sectionElement.querySelectorAll('.filter-btn');
+  
+  // Update active button
+  filterButtons.forEach(btn => {
+    if (btn.getAttribute('data-filter') === filter) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  // Filter items
+  items.forEach(item => {
+    if (filter === 'all') {
+      item.style.display = 'block';
+    } else {
+      const tags = item.getAttribute('data-tags');
+      if (tags && tags.includes(filter)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    }
+  });
+}
 
 
 
