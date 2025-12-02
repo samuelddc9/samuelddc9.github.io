@@ -34,7 +34,7 @@ header::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('pattern.jpg');
+  background: url('images/pattern.jpg');
   opacity: 0.01; /* Adjust the opacity as needed */
   z-index: -1;
 }
@@ -103,7 +103,7 @@ section {
 }
 
 .hero {
-  background: url('hero.png') no-repeat center center/cover;
+  background: url('images/hero.png') no-repeat center center/cover;
   height: 70vh;
   display: flex;
   align-items: center;
@@ -425,9 +425,15 @@ footer {
   display: block;
 }
 
-.blog-post:hover {
+.blog-post:hover:not(.expanded) {
   transform: translateY(-5px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Expanded posts take full width */
+.blog-post.expanded {
+  grid-column: 1 / -1;
+  max-width: 100%;
 }
 
 .blog-post-image {

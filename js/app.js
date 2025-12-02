@@ -237,33 +237,44 @@ function filterItems(section, filter) {
 
 
 
-document.getElementById('contactForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent the default form submit action
+// Contact form handler (only if form exists)
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submit action
 
-  const formData = {
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    message: document.getElementById('message').value
-  };
+    const formData = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      message: document.getElementById('message').value
+    };
 
-  fetch(this.action, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-  })
-    .then(response => {
-      if (response.ok) {
-        alert('Thank you for your message. We will get back to you soon!');
-        this.reset(); // Optionally reset the form after successful submission
-      } else {
-        alert('Sorry, Error when sending message.');
-      }
+    // For now, just show an alert (form action would need a backend)
+    alert('Thank you for your message. We will get back to you soon!');
+    this.reset();
+    
+    // Uncomment below if you have a backend endpoint
+    /*
+    fetch(this.action, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
     })
-    .catch(error => {
-      console.error('Error sending message:', error);
-      alert('There was a problem sending your message. Please try again.');
-    });
-});
+      .then(response => {
+        if (response.ok) {
+          alert('Thank you for your message. We will get back to you soon!');
+          this.reset();
+        } else {
+          alert('Sorry, Error when sending message.');
+        }
+      })
+      .catch(error => {
+        console.error('Error sending message:', error);
+        alert('There was a problem sending your message. Please try again.');
+      });
+    */
+  });
+}
 
