@@ -10,7 +10,7 @@
 <body>
 <header>
   <div class="logo">
-    <a href="index.html"><img src="teamtap.png" alt="Team Tap Games Logo"></a>
+    <a href="index.html"><img src="images/teamtap.png" alt="Team Tap Games Logo"></a>
   </div>
   <nav>
     <ul>
@@ -125,19 +125,32 @@
       console.error('Error loading blog posts:', error);
       const container = document.getElementById('blogPostsContainer');
       if (container) {
-        // Check if it's a CORS error (local file testing)
-        if (error.message.includes('fetch') || error.name === 'TypeError') {
-          container.innerHTML = `
+        let errorMessage = '';
+        if (error.message.includes('fetch') || error.name === 'TypeError' || error.message.includes('Failed to fetch')) {
+          errorMessage = `
             <div style="text-align: center; padding: 40px; color: #666;">
-              <p><strong>Note:</strong> Blog posts require a web server to load.</p>
-              <p>On GitHub Pages, this will work automatically.</p>
-              <p>For local testing, use: <code>python -m http.server 8000</code></p>
+              <p><strong>Error loading blog posts</strong></p>
+              <p>Make sure you're accessing the site through a web server:</p>
+              <p><code>http://localhost:8000/blog.html</code></p>
+              <p>Not: <code>file:///path/to/blog.html</code></p>
+              <p style="margin-top: 20px; font-size: 0.9em; color: #999;">
+                Current URL: ${window.location.href}<br>
+                Protocol: ${window.location.protocol}
+              </p>
             </div>
           `;
         } else {
-          container.innerHTML = 
-            '<p style="text-align: center; color: #666; padding: 40px;">Error loading blog posts. Please try again later.</p>';
+          errorMessage = `
+            <div style="text-align: center; padding: 40px; color: #666;">
+              <p><strong>Error loading blog posts</strong></p>
+              <p>${error.message}</p>
+              <p style="margin-top: 20px; font-size: 0.9em; color: #999;">
+                Check the browser console for more details.
+              </p>
+            </div>
+          `;
         }
+        container.innerHTML = errorMessage;
       }
     }
   }
@@ -197,8 +210,34 @@
     }
   }
 
-  // Load posts when page loads
-  document.addEventListener('DOMContentLoaded', loadBlogPosts);
+  // Check if running from file:// protocol and show warning
+  if (window.location.protocol === 'file:') {
+    const container = document.getElementById('blogPostsContainer');
+    if (container) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 40px; background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; margin: 20px; color: #856404;">
+          <h3 style="color: #856404; margin-bottom: 20px;">⚠️ Wrong Access Method</h3>
+          <p><strong>You're opening this file directly (file:// protocol)</strong></p>
+          <p>This won't work! You need to access it through the web server.</p>
+          <div style="background: #fff; padding: 20px; border-radius: 5px; margin: 20px 0; font-family: monospace;">
+            <p style="margin: 10px 0;"><strong>✅ Correct way:</strong></p>
+            <p style="margin: 10px 0; color: #28a745;">http://localhost:8000/blog.html</p>
+            <p style="margin: 10px 0;"><strong>❌ Wrong way:</strong></p>
+            <p style="margin: 10px 0; color: #dc3545;">file:///Users/.../blog.html</p>
+          </div>
+          <p style="margin-top: 20px;">
+            <strong>Steps:</strong><br>
+            1. Make sure the server is running: <code>python3 -m http.server 8000</code><br>
+            2. Open your browser<br>
+            3. Go to: <a href="http://localhost:8000/blog.html" style="color: #007bff;">http://localhost:8000/blog.html</a>
+          </p>
+        </div>
+      `;
+    }
+  } else {
+    // Load posts when page loads (only if not file://)
+    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+  }
 </script>
 </body>
 </html>

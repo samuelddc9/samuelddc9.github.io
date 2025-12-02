@@ -59,17 +59,17 @@
     },
     {
       "id": 5,
-      "title": "Horizon Breach: Board Game Launch",
+      "title": "Horizon Breach: Board Game",
       "date": "December 20, 2023",
       "category": "announcements",
       "image": "horizon1.webp",
       "excerpt": "We're thrilled to announce the launch of Horizon Breach, our cooperative board game featuring mechas and kaiju. Join us as we defend humanity in this strategic tabletop adventure!",
       "fullContent": [
-        "After months of development and playtesting, we're excited to officially launch Horizon Breach! This cooperative board game brings together everything we love about strategic gameplay and epic battles.",
+        "This cooperative board game brings together everything we love about strategic gameplay and epic battles.",
         "In Horizon Breach, players take on the roles of elite mecha pilots working together to defend humanity from colossal kaiju threats. Each player controls a unique mecha with special abilities, and success requires careful coordination and strategic planning.",
         "The game features a modular board system that creates different battlefields for each playthrough. The kaiju AI system ensures that no two games are ever the same, keeping the experience fresh and challenging.",
         "We've included multiple difficulty levels, from beginner-friendly scenarios to expert challenges that will test even the most experienced players. The game supports 2-4 players and typically takes 60-90 minutes to play.",
-        "Horizon Breach is now available for purchase through our website and select retailers. We're incredibly proud of this project and can't wait to see players experience the thrill of piloting mechas against massive kaiju!"
+        "We're incredibly proud of this project and can't wait to see players experience the thrill of piloting mechas against massive kaiju!"
       ]
     },
     {
@@ -85,6 +85,44 @@
         "We also design our games to reward positive communication. Players who work together and share information are more likely to succeed, creating a natural incentive for collaboration. This doesn't mean we eliminate individual skill - rather, we create systems where individual excellence enhances the team's overall performance.",
         "Another important aspect is managing difficulty. Cooperative games can be tricky to balance - too easy and players don't feel challenged, too hard and frustration sets in. We use extensive playtesting to find that sweet spot where players feel challenged but not overwhelmed.",
         "Finally, we always consider the social aspect of our games. Whether it's couch co-op or online multiplayer, we want our games to be experiences that players remember and want to share with others. That's the true power of cooperative gameplay - it creates lasting memories and strengthens friendships."
+      ]
+    },
+    {
+      "id": 7,
+      "title": "# Building a Zero-Typing WhatsApp Login: When UX Meets Reality",
+      "date": "December 3, 2025",
+      "category": "development",
+      "image": "teamtap.png",
+      "excerpt": "As a 33-year-old software engineer who spends way too much time thinking about UX and product design when I'm not playing board games or diving into the latest tech, I want to share a login system I built that challenged everything I thought I knew about authentication.",
+      "fullContent": [
+        "## The Problem: When Your Users Aren't Tech-Savvy",
+        "I'm building a platform called 'Bora Pra Roça' that connects farmers with agricultural workers in Brazil. The target users are farmers who primarily communicate via WhatsApp, often have limited tech experience, and need something that just works without friction.",
+        "Traditional login flows fall apart for this demographic. Many don't have email addresses they actively use. Phone number verification leads to typing errors, especially with country codes. SMS codes are unreliable in rural areas, and users might not understand the flow anyway. Social login requires understanding OAuth, which is way too complex.",
+        "The solution needed to require zero typing, use a platform they already know, eliminate opportunities for user mistakes, and get them logged in quickly.",
+        "## The Solution: Pre-filled WhatsApp Messages",
+        "Instead of asking users to type their phone number or enter a code, we flip the script. We generate a unique code first, pre-fill a WhatsApp message with that code, and the user just clicks Send.",
+        "From the user's perspective, they click \"Login with WhatsApp,\" WhatsApp opens with a message already typed saying \"Ola, Eu quero entrar no BoraPraRoca. Meu código é: ABC123,\" they click Send, and that's it. They receive a confirmation message and a link back to the app. Zero typing, zero confusion, just click and send.",
+        "## The Technical Architecture",
+        "When the frontend requests a login, the backend generates a unique code before the user even opens WhatsApp. We generate the code server-side and store it in memory with a 10-minute TTL. This means we know what code to expect before the user even sends it.",
+        "The backend detects whether the user is on mobile or desktop and generates the appropriate WhatsApp link format. Mobile users get a deep link that opens the native app directly, while desktop users get a web link that opens WhatsApp Web. Users get the optimal experience for their device without thinking about it.",
+        "When the user sends the message, WhatsApp's webhook hits our backend. We extract the phone number directly from the webhook payload, so no user input is needed. We also get their WhatsApp profile name, which we can use for registration. The backend parses the message to find the unique code using a simple regex pattern.",
+        "The backend handles both login and registration seamlessly. If the user exists, we authenticate them. If they're new, we check if WhatsApp provided their profile name. If it did, we create the account automatically. If not, we ask for their name via WhatsApp, keeping the conversation in their comfort zone.",
+        "The frontend polls for authentication completion every two seconds. WebSockets would be ideal, but polling is simpler and works reliably across all platforms including web, mobile web, and native apps. We set a five-minute timeout so users aren't stuck waiting forever.",
+        "## Design Decisions and Trade-offs",
+        "We store codes in a Map in memory instead of using Redis or a database. This keeps things simple with no external dependencies, provides instant lookups, automatically expires codes after 10 minutes, and works fine for our scale. The trade-off is that codes are lost on server restart, but for our use case, that's acceptable.",
+        "Platform detection happens through user agent parsing. Mobile devices get the native app deep link, while desktop gets the web link. This ensures users always get the best experience for their device.",
+        "We include both Portuguese text and the code in the pre-filled message. Users understand what they're sending, the code is clearly visible, and it feels natural rather than like a robotic system message. We considered just sending the code, but rejected that because it feels too mechanical and users might not understand why.",
+        "For new user registration, we use WhatsApp profile name if available. This reduces friction for users with complete WhatsApp profiles, keeps the conversation in WhatsApp which is familiar territory, and still works if profile data isn't available.",
+        "## What Makes This Work",
+        "Users don't need to understand OAuth, codes, or verification flows. They just use WhatsApp, which is already their primary communication tool. Since they never type their phone number, they can't type it wrong. The system works even if WhatsApp profile data is missing, gracefully falling back to asking for the information we need.",
+        "The metrics tell the story. Time to first login is around 30 seconds compared to 2-3 minutes for traditional flows. Error rate is near zero because there's no typing involved. User satisfaction is high, with users reporting that it just works.",
+        "## Lessons Learned",
+        "Meeting users where they are matters. Don't force them into your preferred authentication method. Every field, every click, every decision is a potential drop-off point, so eliminate friction wherever possible. What seems obvious to tech-savvy developers isn't obvious to everyone, so test with real users. Platform detection matters because mobile and desktop require different approaches. Always have a fallback, like asking for a name if WhatsApp doesn't provide it.",
+        "## Conclusion",
+        "Building this login system reminded me why I love product design. The best solutions are invisible. Users don't think about the technical complexity. They just click a button, send a message, and they're in.",
+        "As a developer, it's easy to get caught up in the latest authentication libraries, OAuth flows, and security best practices. Sometimes the best solution is the one that feels like magic to your users, even if it's just a pre-filled WhatsApp message.",
+        "The full implementation uses Express.js with WhatsApp Business API webhooks on the backend, SvelteKit with polling for auth status on the frontend, an in-memory Map for codes with TTL cleanup, and user agent parsing for optimal link generation. We host the backend on Koyeb and the frontend on Vercel, with MongoDB for user data storage.",
+        "Have you built authentication flows for non-technical users? What challenges did you face? Let me know in the comments, or hit me up on WhatsApp. I'm clearly a fan."
       ]
     }
   ]
