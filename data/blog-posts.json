@@ -124,6 +124,21 @@
         "The full implementation uses Express.js with WhatsApp Business API webhooks on the backend, SvelteKit with polling for auth status on the frontend, an in-memory Map for codes with TTL cleanup, and user agent parsing for optimal link generation. We host the backend on Koyeb and the frontend on Vercel, with MongoDB for user data storage.",
         "Have you built authentication flows for non-technical users? What challenges did you face? Let me know in the comments, or hit me up on WhatsApp. I'm clearly a fan."
       ]
+    },
+    {
+      "id": 7,
+      "title": "Our D&D Hell Stories youtube channel in Portuguese",
+      "date": "December 15, 2023",
+      "category": "offtopic",
+      "image": "teamtap.png",
+      "excerpt": "Cooperation is at the heart of everything we do at Team Tap Games. In this post, we dive deep into the design philosophy behind our cooperative gameplay mechanics and how we create experiences that bring players together.",
+      "fullContent": [
+        "At Team Tap Games, we believe that the best gaming experiences happen when players work together. Our design philosophy centers around creating mechanics that encourage communication, coordination, and genuine teamwork.",
+        "One of the key principles we follow is ensuring that no single player can succeed alone. Each player needs to contribute their unique abilities and perspectives to overcome challenges. This creates a sense of shared accomplishment and makes victories feel truly earned.",
+        "We also design our games to reward positive communication. Players who work together and share information are more likely to succeed, creating a natural incentive for collaboration. This doesn't mean we eliminate individual skill - rather, we create systems where individual excellence enhances the team's overall performance.",
+        "Another important aspect is managing difficulty. Cooperative games can be tricky to balance - too easy and players don't feel challenged, too hard and frustration sets in. We use extensive playtesting to find that sweet spot where players feel challenged but not overwhelmed.",
+        "Finally, we always consider the social aspect of our games. Whether it's couch co-op or online multiplayer, we want our games to be experiences that players remember and want to share with others. That's the true power of cooperative gameplay - it creates lasting memories and strengthens friendships."
+      ]
     }
   ]
 }
