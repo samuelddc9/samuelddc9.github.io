@@ -17,6 +17,6 @@ Site address: https://samuelddc9.github.io/
 - Existing `style.css`, `js/`, `images/`, `projects/`, and `blog.html` continue serving the portfolio and blog.
 - `.nojekyll`: serves these static files without Jekyll processing.
 
-Game illustrations and descriptions in the new design are still provisional, as labelled on the page. Replace them with final game assets and confirmed details when available.
+The homepage features the two announced games supplied by the owner, using official Steam artwork, gameplay screenshots, and summarised descriptions. See ASSET-SOURCES.md. About and Contact are included on the homepage.
 
 The logo is a transparent raster PNG generated with ImageGen and approved in the design conversation.
