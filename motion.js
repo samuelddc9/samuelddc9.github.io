@@ -7,6 +7,32 @@
   let revealObserver;
   const motionEnabled = () => !reducedMotion.matches && !paused;
 
+  // Both halves must each fill the viewport, including ultrawide displays.
+  const ticker = document.querySelector('.ticker');
+  const runs = document.querySelectorAll('.ticker-run');
+  if (ticker && runs.length === 2) {
+    const originals = [...runs[0].children].map(element => element.cloneNode(true));
+    let resizeFrame;
+    function fillRibbon() {
+      runs[0].replaceChildren(...originals.map(element => element.cloneNode(true)));
+      const targetWidth = ticker.getBoundingClientRect().width + 100;
+      let copies = 1;
+      while (runs[0].getBoundingClientRect().width < targetWidth && copies < 30) {
+        runs[0].append(...originals.map(element => element.cloneNode(true)));
+        copies++;
+      }
+      runs[1].replaceChildren(...[...runs[0].children].map(element => element.cloneNode(true)));
+    }
+    function resizeRibbon() {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(fillRibbon);
+    }
+    fillRibbon();
+    document.fonts?.ready.then(resizeRibbon);
+    if ('ResizeObserver' in window) new ResizeObserver(resizeRibbon).observe(ticker);
+    else window.addEventListener('resize', resizeRibbon, { passive: true });
+  }
+
   function revealContent() {
     revealObserver?.disconnect();
     document.querySelectorAll('.reveal').forEach(element => element.classList.add('is-visible'));

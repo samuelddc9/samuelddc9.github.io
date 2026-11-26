@@ -97,3 +97,10 @@ dialog[open]{animation:dialog-arrive .35s cubic-bezier(.2,.8,.2,1)}
 @keyframes dialog-arrive{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:none}}
 /* Keep decorative overflow inside its band and single filtered cards aligned. */ .ticker-wrap{overflow:clip;padding-bottom:33px;margin-bottom:-33px}.game-card[hidden]+.game-card{margin-top:0}@media(max-width:700px){.contact-email{font-size:clamp(21px,6.3vw,28px)}}
 .motion-toggle{bottom:2px}
+/* Let the diagonal ribbon overlap dark above and paper below, without pale seams. */
+.ticker-wrap{padding:clamp(22px,1.5vw,65px) 0 36px;margin-top:-24px;margin-bottom:-36px;background:linear-gradient(var(--ink) 0 45%,var(--paper) 45%);overflow:clip}
+.ticker{margin:0 -2%;transform:rotate(-1deg)}
+.ticker-track{animation-duration:55s}
+.ticker-run{min-width:0}
+.motion-toggle{bottom:3px}
+@media(max-width:700px){.ticker-wrap{padding-top:20px;margin-top:-20px}.ticker{transform:rotate(-1.5deg)}}
