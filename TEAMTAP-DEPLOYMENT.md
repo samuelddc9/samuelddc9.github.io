@@ -2,7 +2,9 @@
 
 The site is static and requires no build, package install, API keys, or backend.
 
-After editing `teamtap.css` or `teamtap.js`, run `node version-assets.mjs` before committing. It updates their content-based URL versions in `index.html` so visitors receive the matching CSS and JavaScript instead of a cached older version.
+After editing `teamtap.css`, `teamtap.js`, `motion.css`, or `motion.js`, run `node version-assets.mjs` before committing. It updates their content-based URL versions in `index.html` so visitors receive the matching CSS and JavaScript instead of a cached older version.
+
+`motion.css` and `motion.js` add scroll entrances, hover surfaces, a moving ticker with a pause control, and shaped section transitions. Content stays visible without JavaScript and motion respects the visitor's reduced-motion preference.
 
 ## Hosting
 
