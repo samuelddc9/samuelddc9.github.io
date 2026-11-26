@@ -2,7 +2,7 @@
 
 The site is static and requires no build, package install, API keys, or backend.
 
-After editing `teamtap.css`, `teamtap.js`, `motion.css`, or `motion.js`, run `node version-assets.mjs` before committing. It updates their content-based URL versions in `index.html` so visitors receive the matching CSS and JavaScript instead of a cached older version.
+After editing `teamtap.css`, `teamtap.js`, `motion.css`, `motion.js`, or `contact.js`, run `node version-assets.mjs` before committing. It updates their content-based URL versions in `index.html` so visitors receive the matching CSS and JavaScript instead of a cached older version.
 
 `motion.css` and `motion.js` add scroll entrances, hover surfaces, a moving ticker with a pause control, and shaped section transitions. Content stays visible without JavaScript and motion respects the visitor's reduced-motion preference.
 
@@ -26,6 +26,16 @@ The root `CNAME` file declares `teamtap.games` as the GitHub Pages custom domain
 The homepage features the two announced games supplied by the owner, using official Steam artwork, gameplay screenshots, and summarised descriptions. See ASSET-SOURCES.md. About and Contact are included on the homepage.
 
 The logo is a transparent raster PNG generated with ImageGen and approved in the design conversation.
+
+## Contact form
+
+The static HTML form posts to the owner-supplied endpoint `https://formspree.io/f/xdegjykl`. Native browser JavaScript in `contact.js` progressively enhances it with AJAX, using `FormData` and `Accept: application/json`. No framework, build step, API secret, or extra browser library is required. Without JavaScript, the form submits normally to Formspree.
+
+The required fields are name, email, and message. The `email` field supplies the reply-to address; `_subject` sets the notification subject and `_gotcha` provides Formspree's honeypot field. Actual recipient delivery, verification, domain restrictions, spam filtering, and account quotas are managed in the Formspree dashboard. Set the notification recipient there to `hello@teamtap.games`; a recipient cannot be securely selected by public HTML.
+
+Submission controls disable while sending. Success clears the form; validation, delivery errors, and network failures preserve the message. Responses appear in a live status region. The endpoint is public by design.
+
+Run `node tests/contact.test.mjs` for local checks of success, validation errors, network failures, rate limits, native validation, and duplicate-submit prevention. Tests mock Formspree and send no external requests. Live inbox delivery has not been tested by sending a submission.
 
 ## Trailers
 
