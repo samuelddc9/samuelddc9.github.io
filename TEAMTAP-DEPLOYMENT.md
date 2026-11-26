@@ -2,6 +2,8 @@
 
 The site is static and requires no build, package install, API keys, or backend.
 
+After editing `teamtap.css` or `teamtap.js`, run `node version-assets.mjs` before committing. It updates their content-based URL versions in `index.html` so visitors receive the matching CSS and JavaScript instead of a cached older version.
+
 ## Hosting
 
 In repository **Settings → Pages**, select **Deploy from a branch**, choose **main** and **/ (root)**, then save. If already configured this way, pushing to main updates the site automatically.
