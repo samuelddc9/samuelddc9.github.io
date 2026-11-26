@@ -11,3 +11,6 @@
 /* Announced games use their official Steam artwork. */
 .game-image{aspect-ratio:460/215}.game-image>img{object-fit:contain}.game-store{margin-top:20px}.game-name{gap:14px}.game-name>span{flex-shrink:0}.dialog-art{height:auto;aspect-ratio:460/215;object-fit:contain}.game-screenshot{margin:25px 0 10px}.game-meta{font-size:12px}.pill{font-size:12px}.collection-note{font-size:12px}.contact .eyebrow{font-size:14px}
 @media(max-width:1100px){.nav-cta{display:none}}
+
+/* Display the full-resolution Steam artwork without cropping or stretching. */
+.game-image,.dialog-art{aspect-ratio:1232/706}.game-image>img{object-position:center}.game-image:hover>img{transform:none}
