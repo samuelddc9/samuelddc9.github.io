@@ -24,3 +24,11 @@ Site address: https://samuelddc9.github.io/
 The homepage features the two announced games supplied by the owner, using official Steam artwork, gameplay screenshots, and summarised descriptions. See ASSET-SOURCES.md. About and Contact are included on the homepage.
 
 The logo is a transparent raster PNG generated with ImageGen and approved in the design conversation.
+
+## Trailers
+
+Game cards and details include Watch trailer buttons. Royal Armory uses the official YouTube announcement trailer (`qMaAcAulGjU`); TeaShop currently streams its official Steam HLS trailer. The `trailers` configuration in `teamtap.js` selects each source. To switch TeaShop to YouTube later, replace its `stream` entry with a `youtube` video ID.
+
+Players load only on click. Closing the trailer by its close button, backdrop, or Escape removes the player and stops playback. The detail dialog remains available when a trailer is launched from it.
+
+TeaShop uses a locally hosted copy of HLS.js 1.7.4, loaded on demand only in browsers without native HLS support. Source: https://github.com/video-dev/hls.js (Apache-2.0). Distribution: https://cdn.jsdelivr.net/npm/hls.js@1.7.4/dist/hls.min.js. License: `assets/vendor/hls.LICENSE`.
