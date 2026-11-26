@@ -10,7 +10,9 @@ After editing `teamtap.css`, `teamtap.js`, `motion.css`, or `motion.js`, run `no
 
 In repository **Settings → Pages**, select **Deploy from a branch**, choose **main** and **/ (root)**, then save. If already configured this way, pushing to main updates the site automatically.
 
-Site address: https://samuelddc9.github.io/
+Site address: https://teamtap.games/
+
+The root `CNAME` file declares `teamtap.games` as the GitHub Pages custom domain. In Squarespace DNS, use GitHub Pages A records (`185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`) at `@`, and a `www` CNAME to `samuelddc9.github.io`. Remove Squarespace's default website A, www CNAME, and HTTPS records when switching. Email MX and TXT records are independent and should be retained. Enable Enforce HTTPS in GitHub Pages once its certificate is ready.
 
 ## Files
 
